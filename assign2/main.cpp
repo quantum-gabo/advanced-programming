@@ -55,17 +55,20 @@ std::unordered_set<std::string> get_applicants(std::string filename) {
  * @param students  The set of student names.
  * @return          A queue containing pointers to each matching name.
  */
-std::queue<const std::string*> find_matches(std::string name, std::set<std::string>& students) {
+std::queue<const std::string*> find_matches(std::string name, std::unordered_set<std::string>& students) {
   // STUDENT TODO: Implement this function.
     std::queue<const std::string*> matches;
-    std::string initials = name.substr(0, 2);
+    std::string student_name;
+    char first_initial = name[0];
+    char last_initial = name[name.find(' ') + 1];
+    
 
     for (auto a = students.begin(); a != students.end(); ++a) {
-        if (a->substr(0, 2) == initials) {
-            matches.push(&(*a));
+        student_name = *a;
+        if (student_name[0] == first_initial && student_name[student_name.find(' ') + 1] == last_initial) {
+            matches.push(&student_name);
         }
     }
-
     return matches;
 }
 
@@ -82,13 +85,21 @@ std::queue<const std::string*> find_matches(std::string name, std::set<std::stri
 std::string get_match(std::queue<const std::string*>& matches) {
   // STUDENT TODO: Implement this function.
     if (matches.empty()) {
-        return "No matches found.";
+        return "NO MATCHES FOUND.";
     }
 
-    std::string match = *matches.front();
+    // Create a copy of the queue to avoid modifying the original
+    std::queue<const std::string*> matches_copy = matches;
+
     // Use something more complicated than a simple pop
-
+    while (!matches_copy.empty()) {
+        std::string student_name = *matches_copy.front();
+        if (student_name == kYourName) {
+            return student_name;
+        }
+        matches_copy.pop();
 }
-
+    return "NO MATCHES FOUND.";
+}
 /* #### Please don't remove this line! #### */
 #include "autograder/utils.hpp"
