@@ -29,7 +29,7 @@ double Particle::getMass() const {
 
 // Getter for kinetic energy
 double Particle::getKineticEnergy() const {
-    double sumSquaredVelocity = 0.0;
+    double sumSquaredVelocity = 0.00;
     for (const auto& v : velocity) {
         sumSquaredVelocity += v * v;
     }

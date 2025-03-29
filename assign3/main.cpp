@@ -11,6 +11,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <stdfloat>
 #include <string>
 #include "class.h"
 #include "sandbox.cpp"

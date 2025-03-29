@@ -3,7 +3,7 @@
  * Created by Fabio Ibanez with modifications by Jacob Roberts-Baca.
  */
 
- #include <iostream>
+#include <iostream>
 #include<vector>
 #include "class.h"
 

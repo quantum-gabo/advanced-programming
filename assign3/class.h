@@ -2,6 +2,7 @@
 #define CLASS_H
 
 #include <vector>
+#include <stdfloat>
 
 class Particle {
 private:
