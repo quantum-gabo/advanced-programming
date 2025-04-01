@@ -1,0 +1,32 @@
+
+# TASK 1: READING AND DISCUSSION
+
+• What is the output of this program?
+    v1 size: 0
+    v2 size: 4
+    v3 size: 4
+
+• Why does v1.size() return 0 after the move?
+    It returns 0 because after the move, its allocated memory is now assgined to v3. 
+
+• What does std::move do?
+    std::move takes the v1 allocated memory and assignes it to v3, leaving v1 empty.
+
+
+• Why is v1 still in a valid but unspecified state?
+    Because after appliying std::move on v1, it state is not known, and we will need to assing v1 new values in order to define its state!
+
+
+#PART 5
+Questions
+
+• What did you learn about move semantics?
+    Move semantics allows us to avoid unnecessary copies, by transferring the ownership of the allocated resources from one object to another.
+
+• In what kinds of projects do you think this would matter?
+    I think this would matter in projects where we deal with lots of temporary data, such as real time simulations, Games, etc.
+
+• What are some risks of using std::move incorrectly?
+    Using std::move incorrectly could lead to data loss, or memory corruption. This could lead to errors in our code!
+
+
