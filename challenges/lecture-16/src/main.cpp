@@ -1,12 +1,14 @@
 
 #include "../include/CLI11.hpp"
-#include "../include/barkeep.h"
 #include<iostream>
 #include<string>
 #include<fstream>
 #include<map>
 #include<sstream>
 #include<vector>
+#include<atomic>
+#include "../include/barkeep.h"
+
 
 // This function reads the retail data from the xlsl file
 std::vector<std::string> parse_retail_line(const std::string& line) {
@@ -56,13 +58,19 @@ int main(int argc, char** argv) {
     std::getline(file, line); // Skip header line
 
     // Initialize the progress bar
-    ::barkeep::ProgressBar bar(total_lines, "Processing");
-    bar.set_width(50);
+    std::atomic<int> progress = 0;
+
+    barkeep::ProgressBarConfig<int> config;
+    config.total = total_lines;
+    config.message = "Processing retail data";
+    config.style = barkeep::ProgressBarStyle::Bars;
+
+    auto bar = barkeep::ProgressBar(&progress, config);
 
 
     while (std::getline(file, line)) {
         // Update the progress bar
-        bar.increment();
+        progress++;
 
         auto tokens = parse_retail_line(line);
         // There must be 8 tokens in the line according to the repo
@@ -93,7 +101,7 @@ int main(int argc, char** argv) {
         }
 
         // Finalize the progress bar
-        bar.finish();
+        bar->done();
 
         // Output Analysis 1
         if (!country.empty()) {
