@@ -63,7 +63,7 @@ int main(int argc, char** argv) {
     barkeep::ProgressBarConfig<int> config;
     config.total = total_lines;
     config.message = "Processing retail data";
-    config.style = barkeep::ProgressBarStyle::Bars;
+    config.style = barkeep::ProgressBarStyle::Block;
 
     auto bar = barkeep::ProgressBar(&progress, config);
 
